@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\MagnesiaPcShop.Infrastructure\MagnesiaPcShop.Infrastructure.csproj" />
+    <ProjectReference Include="..\MagnesiaPcShop.DataTransferObjects\MagnesiaPcShop.DataTransferObjects.csproj" />
+  </ItemGroup>
+
+</Project>
