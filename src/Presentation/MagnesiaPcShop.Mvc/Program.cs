@@ -1,7 +1,16 @@
+using MagnesiaPcShop.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.Data.Common;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var connectionString = builder.Configuration.GetConnectionString("db");
+builder.Services.AddDbContext<MagnesiaPcDbContext>(opt => opt.UseSqlServer(connectionString));
+
 
 var app = builder.Build();
 

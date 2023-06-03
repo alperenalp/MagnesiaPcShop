@@ -11,4 +11,8 @@
     <ProjectReference Include="..\MagnesiaPcShop.DataTransferObjects\MagnesiaPcShop.DataTransferObjects.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
 </Project>
