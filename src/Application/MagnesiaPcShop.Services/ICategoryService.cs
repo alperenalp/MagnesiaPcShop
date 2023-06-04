@@ -4,6 +4,7 @@ namespace MagnesiaPcShop.Services
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<CategoryDisplayResponse>> GetCategoryList();
+        Task<IEnumerable<CategoryDisplayResponse>> GetCategoryListAsync();
+        IEnumerable<CategoryDisplayResponse> GetCategoryList();
     }
 }

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MagnesiaPcShop.Mvc.styles.css" asp-append-version="true" />
+    <link href="~/alertifyjs/css/alertify.min.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -31,9 +32,15 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        <div class="row">
+            <div class="col-2">@await Component.InvokeAsync("CategoryMenu")</div>
+            <div class="col-10">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+
     </div>
 
     <footer class="border-top footer text-muted">
@@ -44,6 +51,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/alertifyjs/alertify.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

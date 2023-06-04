@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Infrastructure\MagnesiaPcShop.Infrastructure\MagnesiaPcShop.Infrastructure.csproj" />
-    <ProjectReference Include="..\MagnesiaPcShop.DataTransferObjects\MagnesiaPcShop.DataTransferObjects.csproj" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
+    <ProjectReference Include="..\..\Infrastructure\MagnesiaPcShop.Infrastructure\MagnesiaPcShop.Infrastructure.csproj" />
+    <ProjectReference Include="..\MagnesiaPcShop.DataTransferObjects\MagnesiaPcShop.DataTransferObjects.csproj" />
   </ItemGroup>
 
 </Project>

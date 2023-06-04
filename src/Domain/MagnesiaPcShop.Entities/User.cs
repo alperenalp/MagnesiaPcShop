@@ -16,8 +16,8 @@ namespace MagnesiaPcShop.Entities
         public string Password { get; set; }
         public string Role { get; set; }
 
-        public List<UserProductReviews> Reviews { get; set; }
-        public List<Order> Orders { get; set; }
+        public IList<UserProductReviews> Reviews { get; set; }
+        public IList<Order> Orders { get; set; }
 
 
     }

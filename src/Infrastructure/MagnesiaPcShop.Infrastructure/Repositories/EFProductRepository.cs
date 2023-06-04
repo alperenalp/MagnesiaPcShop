@@ -64,6 +64,16 @@ namespace MagnesiaPcShop.Infrastructure.Repositories
             return await _dbContext.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public IList<Product> GetProductListByCategory(int categoryId)
+        {
+            return  _dbContext.Products.Where(p => p.CategoryId == categoryId).ToList();
+        }
+
+        public async Task<IList<Product>> GetProductListByCategoryAsync(int categoryId)
+        {
+            return await _dbContext.Products.Where(p=>p.CategoryId == categoryId).ToListAsync();
+        }
+
         public void Update(Product entity)
         {
             _dbContext.Products.Update(entity);

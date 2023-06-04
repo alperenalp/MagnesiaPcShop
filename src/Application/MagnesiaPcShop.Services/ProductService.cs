@@ -1,6 +1,8 @@
-﻿using MagnesiaPcShop.DataTransferObjects.Requests.Product;
+﻿using AutoMapper;
+using MagnesiaPcShop.DataTransferObjects.Requests.Product;
 using MagnesiaPcShop.DataTransferObjects.Responses.Product;
 using MagnesiaPcShop.Infrastructure.Repositories;
+using MagnesiaPcShop.Services.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +14,12 @@ namespace MagnesiaPcShop.Services
     public class ProductService : IProductService
     {
         private readonly IProductRepository _repository;
+        private readonly IMapper _mapper;
 
-        public ProductService(IProductRepository repository)
+        public ProductService(IProductRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public void CreateProduct(CreateNewProductRequest request)
@@ -40,22 +44,44 @@ namespace MagnesiaPcShop.Services
 
         public ProductDisplayResponse GetProductById(int id)
         {
-            throw new NotImplementedException();
+            var product = _repository.GetById(id);
+            var response = product.ConvertToDto<ProductDisplayResponse>(_mapper);
+            return response;
         }
 
-        public Task<ProductDisplayResponse> GetProductByIdAsync(int id)
+        public async Task<ProductDisplayResponse> GetProductByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var product = await _repository.GetByIdAsync(id);
+            var response = product.ConvertToDto<ProductDisplayResponse>(_mapper);
+            return response;
         }
 
         public IEnumerable<ProductDisplayResponse> GetProductList()
         {
-            throw new NotImplementedException();
+            var products = _repository.GetAll();
+            var response = products.ConvertToDto<IEnumerable<ProductDisplayResponse>>(_mapper);
+            return response;
         }
 
-        public Task<IEnumerable<ProductDisplayResponse>> GetProductListAsync()
+        public async Task<IEnumerable<ProductDisplayResponse>> GetProductListAsync()
         {
-            throw new NotImplementedException();
+            var products = await _repository.GetAllAsync();
+            var response = products.ConvertToDto<IEnumerable<ProductDisplayResponse>>(_mapper);
+            return response;
+        }
+
+        public IEnumerable<ProductDisplayResponse> GetProductListByCategory(int id)
+        {
+            var products = _repository.GetProductListByCategory(id);
+            var response = products.ConvertToDto<IEnumerable<ProductDisplayResponse>>(_mapper);
+            return response;
+        }
+
+        public async Task<IEnumerable<ProductDisplayResponse>> GetProductListByCategoryAsync(int id)
+        {
+            var products = await _repository.GetProductListByCategoryAsync(id);
+            var response = products.ConvertToDto<IEnumerable<ProductDisplayResponse>>(_mapper);
+            return response;
         }
 
         public void UpdateProduct(UpdateProductRequest request)
@@ -67,5 +93,7 @@ namespace MagnesiaPcShop.Services
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

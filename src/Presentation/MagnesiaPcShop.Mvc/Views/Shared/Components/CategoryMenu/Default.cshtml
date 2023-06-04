@@ -1,0 +1,8 @@
+﻿@model IEnumerable< CategoryDisplayResponse>
+
+<div class="list-group">
+    @foreach(var item in Model)
+    {
+        <a asp-action="Index" asp-controller="Home" asp-route-categoryId="@item.Id" class="list-group-item-action list-group-item">@item.Name</a>
+    }
+</div>

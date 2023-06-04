@@ -17,7 +17,7 @@ namespace MagnesiaPcShop.Entities
         public int UserId { get; set; }
         public Shipper Shipper { get; set; }
         public int ShipperId { get; set; }
-        public List<OrderDetails> Products { get; set; }
+        public IList<OrderDetails> Products { get; set; }
 
     }
 }
