@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,9 +24,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
                         </li>
-                        @await Component.InvokeAsync("BasketLink")
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdminPage">Yönetim Paneli</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Ürünler</a>
                         </li>
                     </ul>
                 </div>
@@ -33,15 +33,7 @@
         </nav>
     </header>
     <div class="container">
-        <div class="row">
-            <div class="col-2">@await Component.InvokeAsync("CategoryMenu")</div>
-            <div class="col-10">
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
-            </div>
-        </div>
-
+        @RenderBody()
     </div>
 
     <footer class="border-top footer text-muted">

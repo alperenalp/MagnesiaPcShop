@@ -1,5 +1,8 @@
-﻿using MagnesiaPcShop.Services;
+﻿using MagnesiaPcShop.Mvc.Extensions;
+using MagnesiaPcShop.Mvc.Models;
+using MagnesiaPcShop.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace MagnesiaPcShop.Mvc.Controllers
 {
@@ -14,13 +17,28 @@ namespace MagnesiaPcShop.Mvc.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var productCollection = getProductCollectionFromSession();
+            return View(productCollection);
         }
 
         public async Task<IActionResult> AddProduct(int id)
         {
             var product = await _productService.GetProductByIdAsync(id);
+            var productItem = new ProductItem { Product = product, Quantity = 1 };
+            var productCollection = getProductCollectionFromSession();
+            productCollection.AddNewProduct(productItem);
+            saveToSession(productCollection);
             return Json(new { message = $"{product.Name} sepete eklendi." });
+        }
+
+        private ProductCollection getProductCollectionFromSession()
+        {
+            return HttpContext.Session.GetJson<ProductCollection>("basket") ?? new ProductCollection();
+        }
+
+        private void saveToSession(ProductCollection productCollection)
+        {
+            HttpContext.Session.SetJson("basket", productCollection);
         }
     }
 }

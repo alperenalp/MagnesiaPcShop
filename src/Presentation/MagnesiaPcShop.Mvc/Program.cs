@@ -19,6 +19,11 @@ builder.Services.AddScoped<ICategoryRepository, EFCategoryRepository>();
 builder.Services.AddScoped<Product>();
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
+builder.Services.AddSession(opt =>
+{
+	opt.IdleTimeout = TimeSpan.FromMinutes(10);
+});
+
 var connectionString = builder.Configuration.GetConnectionString("db");
 builder.Services.AddDbContext<MagnesiaPcDbContext>(opt => opt.UseSqlServer(connectionString));
 	
@@ -35,6 +40,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseSession();
 
 app.UseRouting();
 

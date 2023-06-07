@@ -1,4 +1,5 @@
-﻿using MagnesiaPcShop.Entities;
+﻿using MagnesiaPcShop.DataTransferObjects.Responses.Product;
+using MagnesiaPcShop.Entities;
 
 namespace MagnesiaPcShop.Mvc.Models
 {
@@ -24,7 +25,7 @@ namespace MagnesiaPcShop.Mvc.Models
 
     public class ProductItem
     {
-        public Product Product { get; set; }
+        public ProductDisplayResponse Product { get; set; }
         public int Quantity { get; set; }
         public bool? ApplyCoupon { get; set; }
     }

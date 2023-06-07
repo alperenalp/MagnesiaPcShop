@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace MagnesiaPcShop.Infrastructure.Repositories
 {
@@ -56,7 +57,7 @@ namespace MagnesiaPcShop.Infrastructure.Repositories
 
         public Product GetById(int id)
         {
-            return _dbContext.Products.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            return _dbContext.Products.AsNoTracking().SingleOrDefault(x => x.Id == id);
         }
 
         public async Task<Product?> GetByIdAsync(int id)

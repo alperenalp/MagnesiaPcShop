@@ -22,16 +22,11 @@ namespace MagnesiaPcShop.Mvc.Controllers
             return View(model);
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> AdminPage()
         {
             return View();
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+      
 
         private async Task<PaginationProductViewModel> getPaginationProductViewModel(int pageNo, int categoryId)
         {
@@ -59,6 +54,17 @@ namespace MagnesiaPcShop.Mvc.Controllers
                 PaginationInfo = paginationInfo
             };
             return model;
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
