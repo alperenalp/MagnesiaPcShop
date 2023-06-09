@@ -1,6 +1,7 @@
 ﻿using MagnesiaPcShop.Mvc.Extensions;
 using MagnesiaPcShop.Mvc.Models;
 using MagnesiaPcShop.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
@@ -29,6 +30,14 @@ namespace MagnesiaPcShop.Mvc.Controllers
             productCollection.AddNewProduct(productItem);
             saveToSession(productCollection);
             return Json(new { message = $"{product.Name} sepete eklendi." });
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var products = getProductCollectionFromSession();
+            products.Delete(id);
+            saveToSession(products);
+            return RedirectToAction(nameof(Index));
         }
 
         private ProductCollection getProductCollectionFromSession()

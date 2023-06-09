@@ -67,12 +67,32 @@ namespace MagnesiaPcShop.Infrastructure.Repositories
 
         public IList<Product> GetProductListByCategory(int categoryId)
         {
-            return  _dbContext.Products.Where(p => p.CategoryId == categoryId).ToList();
+            return _dbContext.Products.Where(p => p.CategoryId == categoryId).ToList();
         }
 
         public async Task<IList<Product>> GetProductListByCategoryAsync(int categoryId)
         {
-            return await _dbContext.Products.Where(p=>p.CategoryId == categoryId).ToListAsync();
+            return await _dbContext.Products.Where(p => p.CategoryId == categoryId).ToListAsync();
+        }
+
+        public IList<Product> GetProductListByName(string productName)
+        {
+            return _dbContext.Products.Where(x=>x.Name.Contains(productName)).ToList();
+        }
+
+        public async Task<IList<Product>> GetProductListByNameAsync(string productName)
+        {
+            return await _dbContext.Products.Where(x => x.Name.Contains(productName)).ToListAsync();
+        }
+
+        public bool IsExists(int id)
+        {
+            return _dbContext.Products.Any(x => x.Id == id);
+        }
+
+        public async Task<bool> IsExistsAsync(int id)
+        {
+            return await _dbContext.Products.AnyAsync(x => x.Id == id);
         }
 
         public void Update(Product entity)

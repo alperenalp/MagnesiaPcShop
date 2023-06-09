@@ -27,7 +27,7 @@ namespace MagnesiaPcShop.Mvc.TagBuilders
             IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
             TagBuilder div = new TagBuilder("div");
             TagBuilder ul = new TagBuilder("ul");
-            ul.AddCssClass("pagination pagination-lg");
+            ul.AddCssClass("pagination");
             for (int i = 1; i <= PageModel.TotalPages; i++)
             {
                 TagBuilder li = new TagBuilder("li");

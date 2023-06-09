@@ -64,6 +64,16 @@ namespace MagnesiaPcShop.Infrastructure.Repositories
             return await _dbContext.Orders.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public bool IsExists(int id)
+        {
+            return _dbContext.Orders.Any(x => x.Id == id);
+        }
+
+        public async Task<bool> IsExistsAsync(int id)
+        {
+            return await _dbContext.Orders.AnyAsync(x => x.Id == id);
+        }
+
         public void Update(Order entity)
         {
             _dbContext.Orders.Update(entity);

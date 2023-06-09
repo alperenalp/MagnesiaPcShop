@@ -26,7 +26,7 @@ namespace MagnesiaPcShop.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>().Property(p => p.Name).IsRequired();
-            modelBuilder.Entity<Product>().Property(p => p.Name).HasMaxLength(100);
+            modelBuilder.Entity<Product>().Property(p => p.Name).HasMaxLength(50);
             modelBuilder.Entity<Product>().Property(p => p.Price).IsRequired();
 
             modelBuilder.Entity<Product>().HasOne(p => p.Category)
@@ -50,8 +50,8 @@ namespace MagnesiaPcShop.Infrastructure.Data
             modelBuilder.Entity<User>().Property(u => u.LastName).IsRequired();
             modelBuilder.Entity<User>().Property(u => u.LastName).HasMaxLength(50);
 
-            modelBuilder.Entity<User>().Property(u => u.UserName).IsRequired();
-            modelBuilder.Entity<User>().Property(u => u.UserName).HasMaxLength(50);
+            modelBuilder.Entity<User>().Property(u => u.Username).IsRequired();
+            modelBuilder.Entity<User>().Property(u => u.Username).HasMaxLength(50);
 
             modelBuilder.Entity<User>().Property(u => u.Password).IsRequired();
             modelBuilder.Entity<User>().Property(u => u.Password).HasMaxLength(50);
@@ -86,11 +86,12 @@ namespace MagnesiaPcShop.Infrastructure.Data
                                           .HasForeignKey(o => o.ShipperId);
 
             modelBuilder.Entity<Category>().Property(c => c.Name).IsRequired();
-            modelBuilder.Entity<Category>().Property(c => c.Name).HasMaxLength(50);
+            modelBuilder.Entity<Category>().Property(c => c.Name).HasMaxLength(25);
 
             modelBuilder.Entity<Category>().HasMany(c => c.Products)
                                           .WithOne(p => p.Category)
-                                          .HasForeignKey(p => p.CategoryId);
+                                          .HasForeignKey(p => p.CategoryId)
+                                          .OnDelete(DeleteBehavior.SetNull);
         }
 
     }

@@ -8,40 +8,74 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MagnesiaPcShop.Mvc.styles.css" asp-append-version="true" />
     <link href="~/alertifyjs/css/alertify.min.css" rel="stylesheet" />
+    <link href="~/font-awesome/css/all.min.css" rel="stylesheet" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow p-2 mb-2">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MagnesiaPcShop.Mvc</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MAGNESİA SHOP</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse d-sm-inline-flex d-flex align-content-between">
+                    <ul class="navbar-nav flex-grow-1 ">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
                         </li>
-                        @await Component.InvokeAsync("BasketLink")
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdminPage">Yönetim Paneli</a>
-                        </li>
+
                     </ul>
+
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            @using (Html.BeginForm("Index","Home",FormMethod.Get))
+                            {
+                                <div class="input-group">
+                                    @Html.TextBox("search",null, new {@class="form-control",@placeholder="Ürün adı"})
+                                    <div class="input-group-append">
+                                        <button type="submit" value="" class="btn btn-primary"> <span class="fas fa-search" /> </button>
+                                    </div>
+                                </div>
+                            }
+
+                        </li>
+
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        @await Component.InvokeAsync("BasketLink")
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Yönetim Paneli</a>
+                                </li>
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Logout">(@User.Identity.Name)Çıkış Yap</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Login">Giriş Yap</a>
+                            </li>
+                        }
+
+                    </ul>
+
                 </div>
+
             </div>
         </nav>
     </header>
     <div class="container">
-        <div class="row">
-            <div class="col-2">@await Component.InvokeAsync("CategoryMenu")</div>
-            <div class="col-10">
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
-            </div>
-        </div>
-
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
     </div>
 
     <footer class="border-top footer text-muted">
@@ -49,6 +83,7 @@
             &copy; 2023 - MagnesiaPcShop.Mvc - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

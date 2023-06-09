@@ -47,7 +47,6 @@ namespace MagnesiaPcShop.Infrastructure.Repositories
         public IList<User> GetAll()
         {
             return _dbContext.Users.AsNoTracking().ToList();
-
         }
 
         public async Task<IList<User>> GetAllAsync()
@@ -63,6 +62,16 @@ namespace MagnesiaPcShop.Infrastructure.Repositories
         public async Task<User?> GetByIdAsync(int id)
         {
             return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public bool IsExists(int id)
+        {
+            return _dbContext.Users.Any(x => x.Id == id);
+        }
+
+        public async Task<bool> IsExistsAsync(int id)
+        {
+            return await _dbContext.Users.AnyAsync(x => x.Id == id);
         }
 
         public void Update(User entity)

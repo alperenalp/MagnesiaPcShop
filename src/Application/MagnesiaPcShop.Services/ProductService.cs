@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MagnesiaPcShop.DataTransferObjects.Requests.Product;
 using MagnesiaPcShop.DataTransferObjects.Responses.Product;
+using MagnesiaPcShop.Entities;
 using MagnesiaPcShop.Infrastructure.Repositories;
 using MagnesiaPcShop.Services.Extensions;
 using System;
@@ -24,22 +25,24 @@ namespace MagnesiaPcShop.Services
 
         public void CreateProduct(CreateNewProductRequest request)
         {
-            throw new NotImplementedException();
+            var product = request.ConvertToProduct(_mapper);
+            _repository.CreateAsync(product);
         }
 
-        public Task CreateProductAsync(CreateNewProductRequest request)
+        public async Task CreateProductAsync(CreateNewProductRequest request)
         {
-            throw new NotImplementedException();
+            var product = request.ConvertToProduct(_mapper);
+            await _repository.CreateAsync(product);
         }
 
         public void DeleteProduct(int id)
         {
-            throw new NotImplementedException();
+            _repository.Delete(id);
         }
 
-        public Task DeleteProductAsync(int id)
+        public async Task DeleteProductAsync(int id)
         {
-            throw new NotImplementedException();
+            await _repository.DeleteAsync(id);
         }
 
         public ProductDisplayResponse GetProductById(int id)
@@ -53,6 +56,20 @@ namespace MagnesiaPcShop.Services
         {
             var product = await _repository.GetByIdAsync(id);
             var response = product.ConvertToDto<ProductDisplayResponse>(_mapper);
+            return response;
+        }
+
+        public UpdateProductRequest GetProductForUpdate(int id)
+        {
+            var product = _repository.GetById(id);
+            var response = product.ConvertToDto<UpdateProductRequest>(_mapper);
+            return response;
+        }
+
+        public async Task<UpdateProductRequest> GetProductForUpdateAsync(int id)
+        {
+            var product = await _repository.GetByIdAsync(id);
+            var response = product.ConvertToDto<UpdateProductRequest>(_mapper);
             return response;
         }
 
@@ -70,28 +87,54 @@ namespace MagnesiaPcShop.Services
             return response;
         }
 
-        public IEnumerable<ProductDisplayResponse> GetProductListByCategory(int id)
+        public IEnumerable<ProductDisplayResponse> GetProductListByCategory(int categoryId)
         {
-            var products = _repository.GetProductListByCategory(id);
+            var products = _repository.GetProductListByCategory(categoryId);
             var response = products.ConvertToDto<IEnumerable<ProductDisplayResponse>>(_mapper);
             return response;
         }
 
-        public async Task<IEnumerable<ProductDisplayResponse>> GetProductListByCategoryAsync(int id)
+        public async Task<IEnumerable<ProductDisplayResponse>> GetProductListByCategoryAsync(int categoryId)
         {
-            var products = await _repository.GetProductListByCategoryAsync(id);
+            var products = await _repository.GetProductListByCategoryAsync(categoryId);
             var response = products.ConvertToDto<IEnumerable<ProductDisplayResponse>>(_mapper);
             return response;
+        }
+
+        public IEnumerable<ProductDisplayResponse> GetProductListByName(string productName)
+        {
+            var products = _repository.GetProductListByName(productName);
+            var response = products.ConvertToDto<IEnumerable<ProductDisplayResponse>>(_mapper);
+            return response;
+        }
+
+        public async Task<IEnumerable<ProductDisplayResponse>> GetProductListByNameAsync(string productName)
+        {
+            var products = await _repository.GetProductListByNameAsync(productName);
+            var response = products.ConvertToDto<IEnumerable<ProductDisplayResponse>>(_mapper);
+            return response;
+        }
+
+        public bool IsProductExists(int id)
+        {
+            return _repository.IsExists(id);
+        }
+
+        public async Task<bool> IsProductExistsAsync(int id)
+        {
+            return await _repository.IsExistsAsync(id);
         }
 
         public void UpdateProduct(UpdateProductRequest request)
         {
-            throw new NotImplementedException();
+            var product = request.ConvertToProduct(_mapper);
+            _repository.Update(product);
         }
 
-        public Task UpdateProductAsync(UpdateProductRequest request)
+        public async Task UpdateProductAsync(UpdateProductRequest request)
         {
-            throw new NotImplementedException();
+            var product = request.ConvertToProduct(_mapper);
+            await _repository.UpdateAsync(product);
         }
 
 

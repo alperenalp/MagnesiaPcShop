@@ -1,8 +1,11 @@
+using MagnesiaBilgisayar.Application.Services;
 using MagnesiaPcShop.Entities;
 using MagnesiaPcShop.Infrastructure.Data;
 using MagnesiaPcShop.Infrastructure.Repositories;
+using MagnesiaPcShop.Mvc.Extensions;
 using MagnesiaPcShop.Services;
 using MagnesiaPcShop.Services.Mappings;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,21 +15,27 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IProductRepository, EFProductRepository>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<ICategoryRepository, EFCategoryRepository>();
-builder.Services.AddScoped<Product>();
-builder.Services.AddAutoMapper(typeof(MapProfile));
+builder.AddInjections();
 
 builder.Services.AddSession(opt =>
 {
 	opt.IdleTimeout = TimeSpan.FromMinutes(10);
 });
 
-var connectionString = builder.Configuration.GetConnectionString("db");
-builder.Services.AddDbContext<MagnesiaPcDbContext>(opt => opt.UseSqlServer(connectionString));
-	
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+				.AddCookie(opt =>
+				{
+					opt.LoginPath = "/Users/Login";
+					opt.AccessDeniedPath = "/Users/AccessDenied";
+					opt.ReturnUrlParameter = "returnUrl";
+				});
+
+builder.Services.AddMemoryCache();
+builder.Services.AddResponseCaching(opt=>
+{
+	opt.SizeLimit = 10000;
+});
 
 var app = builder.Build();
 
@@ -41,10 +50,13 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseResponseCaching();
+
 app.UseSession();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

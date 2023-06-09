@@ -9,16 +9,22 @@ namespace MagnesiaPcShop.Services
         Task CreateProductAsync(CreateNewProductRequest request);
         Task UpdateProductAsync(UpdateProductRequest request);
         Task DeleteProductAsync(int id);
-        Task<IEnumerable<ProductDisplayResponse>> GetProductListAsync();
         Task<ProductDisplayResponse> GetProductByIdAsync(int id);
-        Task<IEnumerable<ProductDisplayResponse>> GetProductListByCategoryAsync(int id);
+        Task<UpdateProductRequest> GetProductForUpdateAsync(int id);
+        Task<IEnumerable<ProductDisplayResponse>> GetProductListAsync();
+        Task<IEnumerable<ProductDisplayResponse>> GetProductListByCategoryAsync(int categoryId);
+        Task<IEnumerable<ProductDisplayResponse>> GetProductListByNameAsync(string productName);
+        Task<bool> IsProductExistsAsync(int id);
+
 
         void CreateProduct(CreateNewProductRequest request);
         void UpdateProduct(UpdateProductRequest request);
         void DeleteProduct(int id);
-        IEnumerable<ProductDisplayResponse> GetProductList();
         ProductDisplayResponse GetProductById(int id);
-        IEnumerable<ProductDisplayResponse> GetProductListByCategory(int id);
-
+        UpdateProductRequest GetProductForUpdate(int id);
+        IEnumerable<ProductDisplayResponse> GetProductList();
+        IEnumerable<ProductDisplayResponse> GetProductListByCategory(int categoryId);
+        IEnumerable<ProductDisplayResponse> GetProductListByName(string productName);
+        bool IsProductExists(int id);
     }
 }

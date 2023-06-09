@@ -1,12 +1,12 @@
 ﻿@model ProductCollection
 @if (Model == null)
 {
-    <li class="nav-item">
+    <li class="nav-item mx-3">
         <a class="nav-link text-dark" asp-area="" asp-controller="Shopping" asp-action="Index">Sepet</a>
     </li>
 }else
 {
-    <li class="nav-item">
+    <li class="nav-item mx-3">
         <a class="nav-link text-dark" asp-area="" asp-controller="Shopping" asp-action="Index">Sepet <span class="badge rounded-pill bg-warning">@Model.TotalProductCount()</span></a>
     </li>
 }
