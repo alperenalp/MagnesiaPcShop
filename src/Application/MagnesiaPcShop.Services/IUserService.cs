@@ -7,6 +7,7 @@ namespace MagnesiaBilgisayar.Application.Services
     public interface IUserService
     {
         Task CreateUserAsync(CreateNewUserRequest request);
+        Task<int> GetUserIdByEmailAsync(string userEmail);
         Task<UserValidateResponse> ValidateUserAsync(ValidateUserLoginRequest request);
     }
 }

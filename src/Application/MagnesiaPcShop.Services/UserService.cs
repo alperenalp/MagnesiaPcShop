@@ -30,6 +30,12 @@ namespace MagnesiaPcShop.Services
             await _userRepository.CreateAsync(user);
         }
 
+        public async Task<int> GetUserIdByEmailAsync(string email)
+        {
+            var user = await _userRepository.GetUserByEmailAsync(email);
+            return user.Id;
+        }
+
         public async Task<UserValidateResponse> ValidateUserAsync(ValidateUserLoginRequest request)
         {
             var users = await _userRepository.GetAllAsync();

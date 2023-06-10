@@ -1,0 +1,27 @@
+﻿@model MagnesiaPcShop.DataTransferObjects.Requests.Order.CreateNewOrderRequest
+
+@{
+    ViewData["Title"] = "CreateOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center mt-5">Sipariş Bilgileri</h1>
+
+<hr />
+<div class="row">
+    <div class="d-flex justify-content-center align-items-center" style="height:400px;">
+        <div class="col-md-4">
+            <form asp-action="CreateOrder">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group text-center">
+                    <input type="submit" value="Sipariş Ver" class="btn btn-success mt-5" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

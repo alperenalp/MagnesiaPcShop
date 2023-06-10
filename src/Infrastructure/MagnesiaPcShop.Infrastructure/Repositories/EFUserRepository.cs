@@ -64,6 +64,11 @@ namespace MagnesiaPcShop.Infrastructure.Repositories
             return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<User?> GetUserByEmailAsync(string email)
+        {
+            return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == email);
+        }
+
         public bool IsExists(int id)
         {
             return _dbContext.Users.Any(x => x.Id == id);

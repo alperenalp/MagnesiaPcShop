@@ -17,6 +17,8 @@ namespace MagnesiaPcShop.Mvc.Extensions
             builder.Services.AddScoped<ICategoryRepository, EFCategoryRepository>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IUserRepository, EFUserRepository>();
+            builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IOrderRepository, EFOrderRepository>();
 
             builder.Services.AddAutoMapper(typeof(MapProfile));
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MagnesiaPcShop.DataTransferObjects.Requests.Category;
+using MagnesiaPcShop.DataTransferObjects.Requests.Order;
 using MagnesiaPcShop.DataTransferObjects.Requests.Product;
 using MagnesiaPcShop.DataTransferObjects.Requests.User;
 using MagnesiaPcShop.DataTransferObjects.Responses.Category;
@@ -28,6 +29,8 @@ namespace MagnesiaPcShop.Services.Mappings
 
             CreateMap<User, UserValidateResponse>();
             CreateMap<User, CreateNewUserRequest>().ReverseMap();
+
+            CreateMap<Order, CreateNewOrderRequest>().ReverseMap();
 
         }
     }

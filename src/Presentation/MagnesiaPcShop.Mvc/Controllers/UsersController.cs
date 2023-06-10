@@ -37,6 +37,7 @@ namespace MagnesiaPcShop.Mvc.Controllers
                 {
                     Claim[] claims = new Claim[]
                     {
+                        new Claim("userId", user.Id.ToString()),//create order test
                         new Claim(ClaimTypes.Name, user.Name),
                         new Claim(ClaimTypes.Email, user.Email),
                         new Claim(ClaimTypes.Role, user.Role)

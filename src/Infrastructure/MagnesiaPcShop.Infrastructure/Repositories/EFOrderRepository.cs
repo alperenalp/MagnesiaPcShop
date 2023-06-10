@@ -30,6 +30,13 @@ namespace MagnesiaPcShop.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<int> CreateOrderAsync(Order order)
+        {
+            await _dbContext.Orders.AddAsync(order);
+            await _dbContext.SaveChangesAsync();
+            return order.Id;
+        }
+
         public void Delete(int id)
         {
             var order = _dbContext.Orders.Find(id);

@@ -51,5 +51,15 @@ namespace MagnesiaPcShop.Services.Extensions
         {
             return mapper.Map<User>(request);
         }
+
+        public static T ConvertToDto<T>(this Order order, IMapper mapper)
+        {
+            return mapper.Map<T>(order);
+        }
+        public static Order ConvertToOrder<T>(this T request, IMapper mapper)
+        {
+            return mapper.Map<Order>(request);
+        }
+
     }
 }
