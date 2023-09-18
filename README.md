@@ -1,6 +1,4 @@
 # <p align="center">Magnesia Bilgisayar </p>
-<p align="center"> Uygulamama <a href="http://alperain-001-site1.htempurl.com/">bu linkten</a> erişebilirsiniz.</p>
-
 <br />
 
 ### Database
